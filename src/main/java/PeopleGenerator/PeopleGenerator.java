@@ -2,6 +2,7 @@ package PeopleGenerator;
 
 import DataStructures.Mappers.FileType.FileType;
 import DataStructures.People.People;
+import PeopleGenerator.PeselGenerator.PeselGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,8 @@ public class PeopleGenerator implements IPeopleGenerator{
     private List<String> maleNames = new ArrayList<String>();
     private List<String> femaleSurnames = new ArrayList<String>();
     private List<String> femaleNames = new ArrayList<String>();
+
+    private PeselGenerator peselGenerator = new PeselGenerator();
 
     @Override
     public People GetRandomHusband() {
@@ -25,6 +28,11 @@ public class PeopleGenerator implements IPeopleGenerator{
     @Override
     public People GetRandomChild(People dad, People mum) {
         return null;
+    }
+
+    @Override
+    public String GeneratePesel(People people) {
+        return peselGenerator.generate(people);
     }
 
     @Override

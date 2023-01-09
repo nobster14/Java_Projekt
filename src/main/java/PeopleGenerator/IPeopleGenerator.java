@@ -13,6 +13,8 @@ public interface IPeopleGenerator {
 
     public People GetRandomChild(People dad, People mum);
 
+    public String GeneratePesel(People people);
+
     /**
      * Metoda dodająca nowe dane do zbióru danych, z którego będziemy generować
      * @param fileType typ wczytywanego pliku

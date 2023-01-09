@@ -5,13 +5,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        System.out.println("Ile danych chcesz wygenerować?");
+    public static void main(String[] args) throws IOException, InterruptedException {
 
-        int n = new Scanner(System.in).nextInt();
         IProgram program = new Program();
-        program.Start(n);
+
+        long startTime = System.currentTimeMillis();
+        //program.Start();
+        long elapsedTime = System.currentTimeMillis() - startTime;
 
         System.out.println("Generacja danych zakończona!");
+        System.out.println("Czas generowania danych zajął " + elapsedTime + " milisekund");
     }
 }
