@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PeopleGenerator implements IPeopleGenerator{
-    private List<String> maleSurnames = new ArrayList<String>();
-    private List<String> maleNames = new ArrayList<String>();
-    private List<String> femaleSurnames = new ArrayList<String>();
-    private List<String> femaleNames = new ArrayList<String>();
+    private final List<String> maleSurnames = new ArrayList<>();
+    private final List<String> maleNames = new ArrayList<>();
+    private final List<String> femaleSurnames = new ArrayList<>();
+    private final List<String> femaleNames = new ArrayList<>();
 
-    private PeselGenerator peselGenerator = new PeselGenerator();
+    private final PeselGenerator peselGenerator = new PeselGenerator();
 
     @Override
-    public People GetRandomHusband() {
+    public People GetRandomAdult() {
         return null;
     }
 
     @Override
-    public People GetRandomWife(People husband) {
+    public People GetRandomSpouse(People husband) {
         return null;
     }
 
@@ -32,7 +32,7 @@ public class PeopleGenerator implements IPeopleGenerator{
 
     @Override
     public String GeneratePesel(People people) {
-        return peselGenerator.generate(people);
+        return peselGenerator.Generate(people);
     }
 
     @Override

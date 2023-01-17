@@ -8,11 +8,21 @@ public class People {
     private String username;
     private Gender gender;
 
+    private String pesel;
+    public People(Date birthDate, Gender gender, String name, String username, String pesel) {
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.name = name;
+        this.username = username;
+        this.pesel = pesel;
+    }
+
     public Gender GetGender() {
-        return null;
+        return gender;
     }
     public Date GetBirthDate() {
-        return null;
+        return birthDate;
     }
+
 }
 
