@@ -1,38 +1,50 @@
 package Program;
 
-import DataStructures.Config;
 import DataStructures.FamilyContainers.FamilyContainer;
 import DataStructures.FamilyContainers.IFamilyContainer;
 import Loader.Loader;
 import PeopleGenerator.PeopleGenerator;
-import org.apache.commons.collections4.Get;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Program implements IProgram{
-    private List<IFamilyContainer> Cointainers = new ArrayList<IFamilyContainer>();
-    private PeopleGenerator generator = new PeopleGenerator();
+public class Program implements IProgram {
+    /**
+     * Kontener zawierający rodziny
+     */
+    private final IFamilyContainer Container = new FamilyContainer();
+    /**
+     * Generator osób
+     */
+    private final PeopleGenerator generator = new PeopleGenerator();
 
-    private void CreateFamilyContainers(int n) {
-        for (int i = 0; i < Math.ceil((float)n / Config.CONTAINER_SIZE); i++)
-            Cointainers.add(new FamilyContainer());
+    /**
+     * Metoda tworząca nasze rodziny
+     * @param n Liczba osób, których dane chcemy wygenerować
+     */
+    private void Create(int n) {
+        Container.Generate(n, generator);
     }
 
-    private void ExportFamilyContainers() {
-        for (var container : Cointainers)
-            container.Export();
+    /**
+     * Metoda tworząca nasze rodziny
+     */
+    private void Export() {
+        Container.Export();
     }
 
     @Override
     public void Start() throws IOException {
         int n = GetN();
         new Loader().Load(generator);
-        CreateFamilyContainers(n);
-        ExportFamilyContainers();
+        Create(n);
+        Export();
     }
+
+    /**
+     * Funkcja przyjmująca z konsoli od użytkownika liczbę osób, którą chce on wygenerować
+     * @return Liczba osób, których dane chcemy wygenerować
+     */
     private int GetN() {
         Scanner input = new Scanner(System.in);
         int n = 0;

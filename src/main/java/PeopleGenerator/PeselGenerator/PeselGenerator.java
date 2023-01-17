@@ -4,7 +4,6 @@ import DataStructures.People.Gender;
 import DataStructures.People.People;
 
 import java.text.DecimalFormat;
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 public class PeselGenerator {
@@ -15,36 +14,35 @@ public class PeselGenerator {
 
     }
 
-    public String generate(People people) {
+    public String Generate(People people) {
         String pesel = "";
 
         try {
-            pesel = String.valueOf(df.format(people.GetBirthDate().getYear() % 100));
+            pesel = df.format(people.GetBirthDate().getYear() % 100);
             pesel += getMonthForPesel(people.GetBirthDate().getYear(), people.GetBirthDate().getMonth());
             pesel += df.format(Double.valueOf(people.GetBirthDate().getDay()));
             pesel += getSeriesNumberForPesel();
             pesel += getSexNumberForPesel(people.GetGender());
-            pesel += String.valueOf(calculateControlNumber(pesel));
+            pesel += String.valueOf(CalculateControlNumber(pesel));
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         return pesel;
     }
 
-    private int calculateControlNumber(String pesel) {
+    private int CalculateControlNumber(String pesel) {
         char[] p = pesel.toCharArray();
-        Integer sum = Integer.valueOf(String.valueOf(p[0])) * 1
-                + Integer.valueOf(String.valueOf(p[1])) * 3
-                + Integer.valueOf(String.valueOf(p[2])) * 7
-                + Integer.valueOf(String.valueOf(p[3])) * 9
-                + Integer.valueOf(String.valueOf(p[4])) * 1
-                + Integer.valueOf(String.valueOf(p[5])) * 3
-                + Integer.valueOf(String.valueOf(p[6])) * 7
-                + Integer.valueOf(String.valueOf(p[7])) * 9
-                + Integer.valueOf(String.valueOf(p[8])) * 1
-                + Integer.valueOf(String.valueOf(p[9])) * 3;
+        int sum = Integer.parseInt(String.valueOf(p[0]))
+                + Integer.parseInt(String.valueOf(p[1])) * 3
+                + Integer.parseInt(String.valueOf(p[2])) * 7
+                + Integer.parseInt(String.valueOf(p[3])) * 9
+                + Integer.parseInt(String.valueOf(p[4]))
+                + Integer.parseInt(String.valueOf(p[5])) * 3
+                + Integer.parseInt(String.valueOf(p[6])) * 7
+                + Integer.parseInt(String.valueOf(p[7])) * 9
+                + Integer.parseInt(String.valueOf(p[8]))
+                + Integer.parseInt(String.valueOf(p[9])) * 3;
 
         int result = sum % 10;
         result = 10 - result;
@@ -55,13 +53,9 @@ public class PeselGenerator {
     public boolean validate(String number) {
         char[] p = number.toCharArray();
 
-        Integer controlNumber = calculateControlNumber(number);
+        Integer controlNumber = CalculateControlNumber(number);
 
-        if (controlNumber.equals(Integer.valueOf(String.valueOf(p[10])))) {
-            return true;
-        }
-
-        return false;
+        return controlNumber.equals(Integer.valueOf(String.valueOf(p[10])));
     }
 
     private String getMonthForPesel(int year, int month) throws Exception {
@@ -87,14 +81,15 @@ public class PeselGenerator {
     private String getSeriesNumberForPesel() {
         RandomDataGen rdg = new RandomDataGen();
         DecimalFormat df = new DecimalFormat("000");
-        String result = df.format(rdg.randBetween(0, 999));
-        return result;
+        return df.format(rdg.randBetween(0, 999));
     }
 
     private String getSexNumberForPesel(Gender gender) {
         if (gender == Gender.female)
             return Integer.toString(new int[]{0, 2, 4, 6, 8}[new Random().nextInt(5)]);
-        else
+        else if (gender == Gender.male)
             return Integer.toString(new int[]{1, 3, 5, 7, 9}[new Random().nextInt(5)]);
+
+        return null;
     }
 }
