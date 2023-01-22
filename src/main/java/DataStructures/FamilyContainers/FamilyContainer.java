@@ -32,7 +32,4 @@ public class FamilyContainer implements IFamilyContainer {
             personsGeneratedCount += template.GetFamilySize();
         }
     }
-
-
-
 }
