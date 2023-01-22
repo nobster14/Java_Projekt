@@ -28,6 +28,7 @@ public class Family implements IFamily {
 
     @Override
     public List<People> Create(PeopleGenerator generator) {
+        if (parentCount == 1) return GetOneAdultFamily(generator);
         List<People> family = new ArrayList<>();
 
 
@@ -43,4 +44,7 @@ public class Family implements IFamily {
 
     public int GetFamilySize() { return childCount + parentCount;}
 
+    private List<People> GetOneAdultFamily(PeopleGenerator generator) {
+        return new ArrayList<People>() {{ add(generator.GetRandomAdult(false)); }};
+    }
 }

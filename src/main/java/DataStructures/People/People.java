@@ -23,6 +23,9 @@ public class People {
     public Date GetBirthDate() {
         return birthDate;
     }
+    public void SetPesel(String pesel) {
+        this.pesel = pesel;
+    }
 
 }
 
