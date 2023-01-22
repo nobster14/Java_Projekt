@@ -14,7 +14,7 @@ public class Config {
 
     public static int maxAdultAge = 80;
 
-    public static int minAdultAge = 80;
+    public static int minAdultAge = 18;
 
     public static int ageDiff = 5;
 }
