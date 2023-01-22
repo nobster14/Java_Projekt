@@ -1,5 +1,6 @@
 package PeopleGenerator;
 
+import DataStructures.Config;
 import DataStructures.Mappers.FileType.FileType;
 import DataStructures.People.Gender;
 import DataStructures.People.People;
@@ -7,6 +8,7 @@ import PeopleGenerator.PeselGenerator.PeselGenerator;
 import PeopleGenerator.PeselGenerator.RandomDataGen;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Date;
 
@@ -27,9 +29,9 @@ public class PeopleGenerator implements IPeopleGenerator{
     public People GetRandomAdult(Boolean isMan) {
         var gender = GetRandomGender(isMan);
         var name = GetRandomName(gender);
-        var username = GetRandomUserName(gender);
-        var birthDate = GetRandomBirthDate(80, 18);
-        var ret = new People(birthDate, gender, name, username, "");
+        var surname = GetRandomSurname(gender, "");
+        var birthDate = GetRandomBirthDate(Config.maxAdultAge, Config.minAdultAge);
+        var ret = new People(birthDate, gender, name, surname, "");
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -37,7 +39,14 @@ public class PeopleGenerator implements IPeopleGenerator{
 
     @Override
     public People GetRandomSpouse(People husband) {
-        return null;
+        var name = GetRandomName(Gender.female);
+        var surname = GetRandomSurname(Gender.female, husband.GetSurname());
+        var birthDate = GetRandomBirthDate(currentDate.getYear() - husband.GetBirthDate().getYear() + Config.ageDiff,
+                currentDate.getYear() - husband.GetBirthDate().getYear() - Config.ageDiff);
+        var ret = new People(birthDate, Gender.female, name, surname, "");
+        ret.SetPesel(GeneratePesel(ret));
+
+        return ret;
     }
 
     @Override
@@ -65,12 +74,21 @@ public class PeopleGenerator implements IPeopleGenerator{
         return gender == Gender.female ? femaleNames.get(random.nextInt(femaleNames.size())) :
                 maleNames.get(random.nextInt(maleNames.size()));
     }
-    private String GetRandomUserName(Gender gender) {
+    private String GetRandomSurname(Gender gender, String husbandSurname) {
+        if (!Objects.equals(husbandSurname, "")) {
+            var username = femaleSurnames.stream()
+                    .filter(x -> x.startsWith(husbandSurname.substring(0, husbandSurname.length() - 1)))
+                    .findFirst();
+
+            return username.orElseGet(() -> femaleSurnames.get(random.nextInt(femaleSurnames.size())));
+        }
+
         return gender == Gender.female ? femaleSurnames.get(random.nextInt(femaleSurnames.size())) :
                 maleSurnames.get(random.nextInt(maleSurnames.size()));
     }
 
     private Date GetRandomBirthDate(int maxAge, int minAge) {
-        return randomData.getRandomDate(currentDate.getYear() - maxAge, currentDate.getYear() - minAge);
+        return randomData.getRandomDate(currentDate.getYear() - maxAge < Config.maxAdultAge ? Config.maxAdultAge : maxAge,
+                currentDate.getYear() - minAge < Config.minAdultAge ? Config.minAdultAge : minAge);
     }
 }

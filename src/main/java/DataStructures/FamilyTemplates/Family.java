@@ -31,6 +31,10 @@ public class Family implements IFamily {
         if (parentCount == 1) return GetOneAdultFamily(generator);
         List<People> family = new ArrayList<>();
 
+        //generujemy ojca/męża
+        family.add(generator.GetRandomAdult(true));
+        //generujemy matkę/żonę
+        family.add(generator.GetRandomSpouse(family.get(0)));
 
         return family;
     }

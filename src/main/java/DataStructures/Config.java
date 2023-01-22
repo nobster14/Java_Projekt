@@ -12,4 +12,9 @@ public class Config {
     public static String maleSurnamesPath = "/male_surnames.xlsx";
     public static String femaleSurnamesPath = "/female_surnames.xlsx";
 
+    public static int maxAdultAge = 80;
+
+    public static int minAdultAge = 80;
+
+    public static int ageDiff = 5;
 }
