@@ -1,10 +1,11 @@
 package PeopleGenerator.PeselGenerator;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class RandomDataGen {
-    public GregorianCalendar getRandomDate(int startYear, int stopYear){
+    public Date getRandomDate(int startYear, int stopYear){
         GregorianCalendar gc = new GregorianCalendar();
         int year = randBetween(startYear, stopYear);
         gc.set(Calendar.YEAR, year);
@@ -12,7 +13,7 @@ public class RandomDataGen {
         int dayOfYear = randBetween(1, gc.getActualMaximum(Calendar.DAY_OF_YEAR));
         gc.set(Calendar.DAY_OF_YEAR, dayOfYear);
 
-        return gc;
+        return new Date(gc.get(Calendar.YEAR), gc.get(Calendar.MONTH), gc.get(Calendar.DATE));
 
     }
 

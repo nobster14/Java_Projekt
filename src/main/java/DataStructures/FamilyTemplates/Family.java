@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Family implements IFamily {
-    private int parentCount;
-    private int childCount;
+    private final int parentCount;
+    private final int childCount;
 
     /**
      * Lista wzorców naszych rodzin
@@ -28,8 +28,17 @@ public class Family implements IFamily {
 
     @Override
     public List<People> Create(PeopleGenerator generator) {
+        if (parentCount == 1) return GetOneAdultFamily(generator);
+
         List<People> family = new ArrayList<>();
 
+        //generujemy ojca/męża
+        family.add(generator.GetRandomAdult(true));
+        //generujemy matkę/żonę
+        family.add(generator.GetRandomSpouse(family.get(0)));
+
+        for (int i = 0; i < childCount; i++)
+            family.add(generator.GetRandomChild(family.get(0), family.get(1)));
 
         return family;
     }
@@ -43,4 +52,7 @@ public class Family implements IFamily {
 
     public int GetFamilySize() { return childCount + parentCount;}
 
+    private List<People> GetOneAdultFamily(PeopleGenerator generator) {
+        return new ArrayList<People>() {{ add(generator.GetRandomAdult(false)); }};
+    }
 }

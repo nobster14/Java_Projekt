@@ -19,8 +19,8 @@ public class PeselGenerator {
 
         try {
             pesel = df.format(people.GetBirthDate().getYear() % 100);
-            pesel += getMonthForPesel(people.GetBirthDate().getYear(), people.GetBirthDate().getMonth());
-            pesel += df.format(Double.valueOf(people.GetBirthDate().getDay()));
+            pesel += getMonthForPesel(people.GetBirthDate().getYear() + 1900, people.GetBirthDate().getMonth() + 1);
+            pesel += df.format(Double.valueOf(people.GetBirthDate().getDate()));
             pesel += getSeriesNumberForPesel();
             pesel += getSexNumberForPesel(people.GetGender());
             pesel += String.valueOf(CalculateControlNumber(pesel));
