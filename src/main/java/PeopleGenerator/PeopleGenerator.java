@@ -113,6 +113,8 @@ public class PeopleGenerator implements IPeopleGenerator{
         return cities.get(new Random().nextInt(cities.size()));
     }
     private String GetRandomStreet() {
-        return streets.get(new Random().nextInt(streets.size()));
+        var firstNumber = new Random().nextInt(1, 99);
+        var secondNumber = new Random().nextInt(1, 99);
+        return streets.get(new Random().nextInt(streets.size())) + " " + firstNumber + "/" + secondNumber;
     }
 }
