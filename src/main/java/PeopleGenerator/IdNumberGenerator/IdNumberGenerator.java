@@ -31,40 +31,27 @@ public class IdNumberGenerator {
         return s.toString();
     }
 
-
-    public static String getLetterValue(String s) {
-        String t = "";
-        for (int i = 0; i < s.length(); ++i) {
-            char ch = s.charAt(i);
-            if (!t.isEmpty()) {
-                t += " ";
-            }
-            int n = (int)ch - (int)'a' + 1;
-            t += String.valueOf(n);
-        }
-        return t;
-    }
-
     public static String getRandomNumberString() {
         Random rnd = new Random();
         // 5 losowych cyfr
         int number = rnd.nextInt(99999);
-        return String.format("%06d", number);
+        return String.format("%05d", number);
     }
 
     public static char getControlNumber(String id) {
         int checkSum;
         int control;
         char[] p = id.toCharArray();
-        checkSum = 7 * ((int)p[0] - (int)'a' + 1)
-                + 3 * ((int)p[1] - (int)'a' + 1)
-                + ((int)p[2] - (int)'a' + 1)
+        // mapowanie z ASCII na wartości z sumy kontrolnej dowodu
+        checkSum = 7 * ((int)p[0] - 55)
+                + 3 * ((int)p[1] - 55)
+                + ((int)p[2] - 55)
                 + 7 * Integer.parseInt(String.valueOf(p[3]))
                 + 3 * Integer.parseInt(String.valueOf(p[4]))
                 + Integer.parseInt(String.valueOf(p[5]))
                 + 7 * Integer.parseInt(String.valueOf(p[6]))
                 + 3 * Integer.parseInt(String.valueOf(p[7]));
         control = checkSum % 10;
-        return (char) control;
+        return (char) (control + (int)'0');
     }
 }
