@@ -1,7 +1,7 @@
 package PeopleGenerator.PeselGenerator;
 
-import DataStructures.People.Gender;
-import DataStructures.People.People;
+import dataStructures.People.Gender;
+import dataStructures.People.People;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -19,8 +19,8 @@ public class PeselGenerator {
 
         try {
             pesel = df.format(people.GetBirthDate().getYear() % 100);
-            pesel += getMonthForPesel(people.GetBirthDate().getYear(), people.GetBirthDate().getMonth());
-            pesel += df.format(Double.valueOf(people.GetBirthDate().getDay()));
+            pesel += getMonthForPesel(people.GetBirthDate().getYear() + 1900, people.GetBirthDate().getMonth() + 1);
+            pesel += df.format(Double.valueOf(people.GetBirthDate().getDate()));
             pesel += getSeriesNumberForPesel();
             pesel += getSexNumberForPesel(people.GetGender());
             pesel += String.valueOf(CalculateControlNumber(pesel));

@@ -1,7 +1,7 @@
 package Program;
 
-import DataStructures.FamilyContainers.FamilyContainer;
-import DataStructures.FamilyContainers.IFamilyContainer;
+import dataStructures.FamilyContainers.FamilyContainer;
+import dataStructures.FamilyContainers.IFamilyContainer;
 import Loader.Loader;
 import PeopleGenerator.PeopleGenerator;
 
@@ -29,7 +29,7 @@ public class Program implements IProgram {
     /**
      * Metoda tworząca nasze rodziny
      */
-    private void Export() {
+    private void Export() throws IOException {
         Container.Export();
     }
 
