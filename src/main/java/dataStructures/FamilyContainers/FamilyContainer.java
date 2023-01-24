@@ -1,7 +1,7 @@
-package DataStructures.FamilyContainers;
+package dataStructures.FamilyContainers;
 
-import DataStructures.FamilyTemplates.Family;
-import DataStructures.People.People;
+import dataStructures.FamilyTemplates.Family;
+import dataStructures.People.People;
 import PeopleGenerator.PeopleGenerator;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package DataStructures.People;
+package dataStructures.People;
 
 public enum Gender {
     male,

@@ -1,4 +1,4 @@
-package DataStructures;
+package dataStructures;
 
 /**
  * Klasa ze stałymi odpowiadającymi za działanie programu
@@ -11,6 +11,8 @@ public class Config {
     public static String femaleNamesPath = "/female_names.xlsx";
     public static String maleSurnamesPath = "/male_surnames.xlsx";
     public static String femaleSurnamesPath = "/female_surnames.xlsx";
+    public static String citiesPath = "/cities.xlsx";
+    public static String streetsPath = "/streets.xlsx";
 
     public static int maxAdultAge = 80;
 

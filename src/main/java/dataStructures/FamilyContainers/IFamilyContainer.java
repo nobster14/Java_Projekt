@@ -1,4 +1,4 @@
-package DataStructures.FamilyContainers;
+package dataStructures.FamilyContainers;
 
 import PeopleGenerator.PeopleGenerator;
 

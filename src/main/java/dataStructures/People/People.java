@@ -1,4 +1,4 @@
-package DataStructures.People;
+package dataStructures.People;
 
 import java.util.Date;
 
@@ -8,13 +8,20 @@ public class People {
     private String surname;
     private Gender gender;
 
+    private String idNumber;
+
     private String pesel;
-    public People(Date birthDate, Gender gender, String name, String surname, String pesel) {
+    private String city;
+    private String street;
+    public People(Date birthDate, Gender gender, String name, String surname, String pesel, String idNumber, String city, String street) {
         this.birthDate = birthDate;
         this.gender = gender;
         this.name = name;
         this.surname = surname;
         this.pesel = pesel;
+        this.idNumber = idNumber;
+        this.street = street;
+        this.city = city;
     }
 
     public Gender GetGender() {
@@ -29,6 +36,7 @@ public class People {
     public String GetSurname() {
         return this.surname;
     }
-
+    public String GetCity() { return this.city; }
+    public String GetStreet() { return this.street; }
 }
 

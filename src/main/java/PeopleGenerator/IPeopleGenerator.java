@@ -1,7 +1,7 @@
 package PeopleGenerator;
 
-import DataStructures.Mappers.FileType.FileType;
-import DataStructures.People.People;
+import dataStructures.Mappers.FileType.FileType;
+import dataStructures.People.People;
 
 /**
  * Klasa służąca generowaniu danych

@@ -1,7 +1,7 @@
 package Program;
 
-import DataStructures.FamilyContainers.FamilyContainer;
-import DataStructures.FamilyContainers.IFamilyContainer;
+import dataStructures.FamilyContainers.FamilyContainer;
+import dataStructures.FamilyContainers.IFamilyContainer;
 import Loader.Loader;
 import PeopleGenerator.PeopleGenerator;
 

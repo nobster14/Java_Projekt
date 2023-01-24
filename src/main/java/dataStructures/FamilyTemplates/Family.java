@@ -1,6 +1,6 @@
-package DataStructures.FamilyTemplates;
+package dataStructures.FamilyTemplates;
 
-import DataStructures.People.People;
+import dataStructures.People.People;
 import PeopleGenerator.PeopleGenerator;
 
 import java.util.ArrayList;

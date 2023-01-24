@@ -1,9 +1,10 @@
 package PeopleGenerator;
 
-import DataStructures.Config;
-import DataStructures.Mappers.FileType.FileType;
-import DataStructures.People.Gender;
-import DataStructures.People.People;
+import PeopleGenerator.IdNumberGenerator.IdNumberGenerator;
+import dataStructures.Config;
+import dataStructures.Mappers.FileType.FileType;
+import dataStructures.People.Gender;
+import dataStructures.People.People;
 import PeopleGenerator.PeselGenerator.PeselGenerator;
 import PeopleGenerator.PeselGenerator.RandomDataGen;
 
@@ -17,19 +18,23 @@ public class PeopleGenerator implements IPeopleGenerator{
     private final ArrayList<String> maleNames = new ArrayList<>();
     private final ArrayList<String> femaleSurnames = new ArrayList<>();
     private final ArrayList<String> femaleNames = new ArrayList<>();
-
+    private final ArrayList<String> cities = new ArrayList<>();
+    private final ArrayList<String> streets = new ArrayList<>();
     private final PeselGenerator peselGenerator = new PeselGenerator();
     private final RandomDataGen randomData = new RandomDataGen();
 
     private final Date currentDate = new Date(System.currentTimeMillis());
 
+    private final IdNumberGenerator idNumberGenerator = new IdNumberGenerator();
     @Override
     public People GetRandomAdult(Boolean isMan) {
         var gender = GetRandomGender(isMan);
         var name = GetRandomName(gender);
         var surname = GetRandomSurname(gender, "");
         var birthDate = GetRandomBirthDate(Config.maxAdultAge, Config.minAdultAge);
-        var ret = new People(birthDate, gender, name, surname, "");
+        var city = GetRandomCity();
+        var street = GetRandomStreet();
+        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -41,7 +46,9 @@ public class PeopleGenerator implements IPeopleGenerator{
         var surname = GetRandomSurname(Gender.female, husband.GetSurname());
         var birthDate = GetRandomBirthDate(currentDate.getYear() - husband.GetBirthDate().getYear() + Config.ageDiff,
                 currentDate.getYear() - husband.GetBirthDate().getYear() - Config.ageDiff);
-        var ret = new People(birthDate, Gender.female, name, surname, "");
+        var city = husband.GetCity();
+        var street = husband.GetStreet();
+        var ret = new People(birthDate, Gender.female, name, surname, "", idNumberGenerator.Generate(), city, street);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -56,7 +63,9 @@ public class PeopleGenerator implements IPeopleGenerator{
                         ?  dad.GetSurname().substring(0, dad.GetSurname().length() - 1) + "a" : dad.GetSurname();
         var birthDate = GetRandomBirthDate(currentDate.getYear() - Math.min(dad.GetBirthDate().getYear(), mum.GetBirthDate().getYear())  - Config.minAdultAge,
                 0);
-        var ret = new People(birthDate, gender, name, surname, "");
+        var city = dad.GetCity();
+        var street = dad.GetStreet();
+        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -69,6 +78,8 @@ public class PeopleGenerator implements IPeopleGenerator{
             case femaleNames -> femaleNames.add(data);
             case maleSurnames -> maleSurnames.add(data);
             case femaleSurnames -> femaleSurnames.add(data);
+            case cities -> cities.add(data);
+            case streets -> streets.add(data);
         }
     }
 
@@ -94,9 +105,14 @@ public class PeopleGenerator implements IPeopleGenerator{
         return gender == Gender.female ? femaleSurnames.get(new Random().nextInt(femaleSurnames.size())) :
                 maleSurnames.get(new Random().nextInt(maleSurnames.size()));
     }
-
     private Date GetRandomBirthDate(int maxAge, int minAge) {
         return randomData.getRandomDate(currentDate.getYear() - Math.min(maxAge, Config.maxAdultAge),
                 currentDate.getYear() - Math.max(minAge, Config.minAdultAge));
+    }
+    private String GetRandomCity() {
+        return cities.get(new Random().nextInt(cities.size()));
+    }
+    private String GetRandomStreet() {
+        return streets.get(new Random().nextInt(streets.size()));
     }
 }

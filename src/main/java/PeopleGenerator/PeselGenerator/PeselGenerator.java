@@ -1,7 +1,7 @@
 package PeopleGenerator.PeselGenerator;
 
-import DataStructures.People.Gender;
-import DataStructures.People.People;
+import dataStructures.People.Gender;
+import dataStructures.People.People;
 
 import java.text.DecimalFormat;
 import java.util.Random;

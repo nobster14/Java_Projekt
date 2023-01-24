@@ -1,8 +1,8 @@
 package Loader;
 
-import DataStructures.Config;
-import DataStructures.Mappers.FileType.FileType;
-import DataStructures.Mappers.FileType.FileTypeMapper;
+import dataStructures.Config;
+import dataStructures.Mappers.FileType.FileType;
+import dataStructures.Mappers.FileType.FileTypeMapper;
 import PeopleGenerator.IPeopleGenerator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -20,6 +20,8 @@ public class Loader implements ILoader{
         LoadData(FileType.maleSurnames, generator);
         LoadData(FileType.femaleNames, generator);
         LoadData(FileType.femaleSurnames, generator);
+        LoadData(FileType.cities, generator);
+        LoadData(FileType.streets, generator);
     }
 
     /**
