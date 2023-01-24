@@ -1,7 +1,8 @@
-package DataStructures.FamilyTemplates;
+package dataStructures.FamilyTemplates;
 
-import DataStructures.People.People;
+import dataStructures.People.People;
 import PeopleGenerator.PeopleGenerator;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,16 @@ public class Family implements IFamily {
 
         return family;
     }
+    /**
+     * @return Id nowej komórki
+     */
+    public static int Export(XSSFSheet sheet, int id, List<People> family) {
+        for (var familyMember : family) {
+            var row = sheet.createRow(id++);
+            familyMember.Export(row);
+        }
 
-    @Override
-    public void Export() {
-
+        return id;
     }
 
     public static ArrayList<Family> GetTemplates() { return familyTemplates; }

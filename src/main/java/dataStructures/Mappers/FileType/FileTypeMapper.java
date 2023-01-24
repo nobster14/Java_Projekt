@@ -1,6 +1,6 @@
-package DataStructures.Mappers.FileType;
+package dataStructures.Mappers.FileType;
 
-import DataStructures.Config;
+import dataStructures.Config;
 
 public class FileTypeMapper {
     public static String MapFileTypeToFileName(FileType fileType)
@@ -17,6 +17,12 @@ public class FileTypeMapper {
             }
             case femaleSurnames -> {
                 return Config.femaleSurnamesPath;
+            }
+            case cities -> {
+                return Config.citiesPath;
+            }
+            case streets -> {
+                return  Config.streetsPath;
             }
         }
         return null;
