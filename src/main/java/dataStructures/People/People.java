@@ -1,5 +1,8 @@
 package dataStructures.People;
 
+import dataStructures.Mappers.FamilyMember.FamilyMemberMapper;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+
 import java.util.Date;
 
 public class People {
@@ -13,7 +16,9 @@ public class People {
     private String pesel;
     private String city;
     private String street;
-    public People(Date birthDate, Gender gender, String name, String surname, String pesel, String idNumber, String city, String street) {
+
+    private FamilyMember who;
+    public People(Date birthDate, Gender gender, String name, String surname, String pesel, String idNumber, String city, String street, FamilyMember who) {
         this.birthDate = birthDate;
         this.gender = gender;
         this.name = name;
@@ -22,6 +27,7 @@ public class People {
         this.idNumber = idNumber;
         this.street = street;
         this.city = city;
+        this.who = who;
     }
 
     public Gender GetGender() {
@@ -38,5 +44,25 @@ public class People {
     }
     public String GetCity() { return this.city; }
     public String GetStreet() { return this.street; }
+
+    public void Export (XSSFRow row) {
+        int cellId = 0;
+        var cell = row.createCell(cellId++);
+        cell.setCellValue(name);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(surname);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(birthDate.toLocaleString().split(",")[0]);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(pesel);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(city);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(street);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(idNumber);
+        cell = row.createCell(cellId++);
+        cell.setCellValue(FamilyMemberMapper.MapFamilyMemberToString(who));
+    }
 }
 

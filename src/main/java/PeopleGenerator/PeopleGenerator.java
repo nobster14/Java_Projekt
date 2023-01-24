@@ -3,6 +3,7 @@ package PeopleGenerator;
 import PeopleGenerator.IdNumberGenerator.IdNumberGenerator;
 import dataStructures.Config;
 import dataStructures.Mappers.FileType.FileType;
+import dataStructures.People.FamilyMember;
 import dataStructures.People.Gender;
 import dataStructures.People.People;
 import PeopleGenerator.PeselGenerator.PeselGenerator;
@@ -34,7 +35,8 @@ public class PeopleGenerator implements IPeopleGenerator{
         var birthDate = GetRandomBirthDate(Config.maxAdultAge, Config.minAdultAge);
         var city = GetRandomCity();
         var street = GetRandomStreet();
-        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street);
+        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street,
+                gender == Gender.female ? FamilyMember.mum : FamilyMember.dad);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -48,7 +50,7 @@ public class PeopleGenerator implements IPeopleGenerator{
                 currentDate.getYear() - husband.GetBirthDate().getYear() - Config.ageDiff);
         var city = husband.GetCity();
         var street = husband.GetStreet();
-        var ret = new People(birthDate, Gender.female, name, surname, "", idNumberGenerator.Generate(), city, street);
+        var ret = new People(birthDate, Gender.female, name, surname, "", idNumberGenerator.Generate(), city, street, FamilyMember.mum);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;
@@ -65,7 +67,8 @@ public class PeopleGenerator implements IPeopleGenerator{
                 0);
         var city = dad.GetCity();
         var street = dad.GetStreet();
-        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street);
+        var ret = new People(birthDate, gender, name, surname, "", idNumberGenerator.Generate(), city, street,
+                gender == Gender.female ? FamilyMember.daughter : FamilyMember.son);
         ret.SetPesel(GeneratePesel(ret));
 
         return ret;

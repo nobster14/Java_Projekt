@@ -29,7 +29,7 @@ public class Program implements IProgram {
     /**
      * Metoda tworząca nasze rodziny
      */
-    private void Export() {
+    private void Export() throws IOException {
         Container.Export();
     }
 

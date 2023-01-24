@@ -47,6 +47,6 @@ public class Loader implements ILoader{
      */
     private String GetPath(String fileName) throws IOException {
         String path = new java.io.File(".").getCanonicalPath();
-        return path + Config.folderName + fileName;
+        return path + Config.inputDataFolderName + fileName;
     }
 }

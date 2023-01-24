@@ -7,5 +7,5 @@
 6. Rozlosowanie płci i wieku - Done
 7. Przypisanie pokrewieństw - Done
 8. Rozlosowanie imion i nazwisk - Done
-9. Eksport do pliku excel
+9. Eksport do pliku excel - Done
 10. Przygotowanie raportu
