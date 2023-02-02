@@ -2,6 +2,7 @@ package dataStructures.FamilyTemplates;
 
 import dataStructures.People.People;
 import PeopleGenerator.PeopleGenerator;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Family implements IFamily {
     /**
      * @return Id nowej komórki
      */
-    public static int Export(XSSFSheet sheet, int id, List<People> family) {
+    public static int Export(SXSSFSheet sheet, int id, List<People> family) {
         for (var familyMember : family) {
             var row = sheet.createRow(id++);
             familyMember.Export(row);

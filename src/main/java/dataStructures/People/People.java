@@ -1,6 +1,8 @@
 package dataStructures.People;
 
 import dataStructures.Mappers.FamilyMember.FamilyMemberMapper;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 
 import java.util.Date;
@@ -45,7 +47,7 @@ public class People {
     public String GetCity() { return this.city; }
     public String GetStreet() { return this.street; }
 
-    public void Export (XSSFRow row) {
+    public void Export (SXSSFRow row) {
         int cellId = 0;
         var cell = row.createCell(cellId++);
         cell.setCellValue(name);
