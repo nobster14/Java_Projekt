@@ -27,8 +27,8 @@ public class Exporter {
     public Exporter(String spreadsheetName) {
         workbook = new SXSSFWorkbook();
         sheetName = spreadsheetName;
-        spreadsheets.add(workbook.createSheet(spreadsheetName + "" + sheetId));
-
+        spreadsheets.add(workbook.createSheet(spreadsheetName + " " + sheetId));
+        InitSheet(spreadsheets.get(sheetId));
     }
 
     public void WriteFamilyToSheet(List<People> family) {

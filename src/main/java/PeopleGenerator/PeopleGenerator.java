@@ -61,8 +61,8 @@ public class PeopleGenerator implements IPeopleGenerator{
         var gender = GetRandomGender(false);
         var name = GetRandomName(gender);
         var surname = gender == Gender.male ? dad.GetSurname() :
-                dad.GetSurname().substring(dad.GetSurname().length() - 1).equals("i")
-                        ?  dad.GetSurname().substring(0, dad.GetSurname().length() - 1) + "a" : dad.GetSurname();
+                dad.GetSurname().substring(dad.GetSurname().length() - 1).equals("I")
+                        ?  dad.GetSurname().substring(0, dad.GetSurname().length() - 1) + "A" : dad.GetSurname();
         var birthDate = GetRandomBirthDate(currentDate.getYear() - Math.min(dad.GetBirthDate().getYear(), mum.GetBirthDate().getYear())  - Config.minAdultAge,
                 0);
         var city = dad.GetCity();

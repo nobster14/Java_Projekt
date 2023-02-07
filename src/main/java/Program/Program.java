@@ -36,9 +36,17 @@ public class Program implements IProgram {
     @Override
     public void Start() throws IOException {
         int n = GetN();
+
+        long startTime = System.currentTimeMillis();
+
         new Loader().Load(generator);
         Create(n);
         Export();
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        System.out.println("Generacja danych zakończona!");
+        System.out.println("Czas generowania danych zajął " + elapsedTime + " milisekund");
     }
 
     /**
